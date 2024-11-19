@@ -6,6 +6,8 @@ defmodule Hw5Web.PostLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
+    if connected?(socket), do: Timeline.subscribe()
+
     {:ok, stream(socket, :posts, Timeline.list_posts())}
   end
 
@@ -35,6 +37,16 @@ defmodule Hw5Web.PostLive.Index do
   @impl true
   def handle_info({Hw5Web.PostLive.FormComponent, {:saved, post}}, socket) do
     {:noreply, stream_insert(socket, :posts, post)}
+  end
+
+  @impl true
+  def handle_info({:post_created, post}, socket) do
+    {:noreply, stream_insert(socket, :posts, post)}
+  end
+
+  @impl true
+  def handle_info({:post_deleted, post}, socket) do
+    {:noreply, stream_delete(socket, :posts, post)}
   end
 
   @impl true

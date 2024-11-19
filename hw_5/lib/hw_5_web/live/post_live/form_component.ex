@@ -9,7 +9,6 @@ defmodule Hw5Web.PostLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Use this form to manage post records in your database.</:subtitle>
       </.header>
 
       <.simple_form
@@ -19,10 +18,7 @@ defmodule Hw5Web.PostLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:username]} type="text" label="Username" />
-        <.input field={@form[:body]} type="text" label="Body" />
-        <.input field={@form[:likes_count]} type="number" label="Likes count" />
-        <.input field={@form[:reposts_count]} type="number" label="Reposts count" />
+        <.input field={@form[:body]} type="textarea" label="Body" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Post</.button>
         </:actions>
