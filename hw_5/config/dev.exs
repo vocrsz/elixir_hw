@@ -2,13 +2,10 @@ import Config
 
 # Configure your database
 config :hw_5, Hw5.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "hw_5_dev",
+  database: Path.expand("../hw_5_dev.db", __DIR__),
+  pool_size: 5,
   stacktrace: true,
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+  show_sensitive_data_on_connection_error: true
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -23,7 +20,7 @@ config :hw_5, Hw5Web.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "xKGr+8BbC8i69LlMMX0fIHeF9E3R+u4koplFKlEqTWEsdwkIaJRbcKFpmi61mvIH",
+  secret_key_base: "KXCETv+hnN7ij74bqq5PGZpAbD0S4SgvXUIUyM8CkBVrbLPG2bgk00+tR6WBliC9",
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:hw_5, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:hw_5, ~w(--watch)]}

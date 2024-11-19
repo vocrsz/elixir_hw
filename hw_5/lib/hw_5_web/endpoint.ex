@@ -7,7 +7,7 @@ defmodule Hw5Web.Endpoint do
   @session_options [
     store: :cookie,
     key: "_hw_5_key",
-    signing_salt: "HYlLREPS",
+    signing_salt: "XNuBzDx4",
     same_site: "Lax"
   ]
 

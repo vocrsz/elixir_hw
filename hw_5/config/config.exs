@@ -20,7 +20,7 @@ config :hw_5, Hw5Web.Endpoint,
     layout: false
   ],
   pubsub_server: Hw5.PubSub,
-  live_view: [signing_salt: "Y/yDl8tE"]
+  live_view: [signing_salt: "yCCnJtNl"]
 
 # Configures the mailer
 #
