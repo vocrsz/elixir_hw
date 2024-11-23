@@ -22,7 +22,8 @@ defmodule Hw6.MixProject do
   defp deps do
     [
       exqlite: "~> 0.27",
-      ecto: "~> 3.10"
+      ecto: "~> 3.10",
+      ecto_sqlite3: "~> 0.17"
     ]
   end
 end
