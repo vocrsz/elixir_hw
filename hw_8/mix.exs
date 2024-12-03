@@ -32,6 +32,10 @@ defmodule Hw8.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:bumblebee, "~> 0.6.0"},
+      {:exla, "~> 0.9.2"},
+
+      #
       {:phoenix, "~> 1.7.14"},
       {:phoenix_ecto, "~> 4.5"},
       {:ecto_sql, "~> 3.10"},
