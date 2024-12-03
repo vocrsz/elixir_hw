@@ -15,6 +15,7 @@ defmodule Hw8.Application do
         skip: skip_migrations?()},
       {DNSCluster, query: Application.get_env(:hw_8, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Hw8.PubSub},
+      {Nx.Serving, serving: serving(), name: MyServing},
       # Start the Finch HTTP client for sending emails
       {Finch, name: Hw8.Finch},
       # Start a worker by calling: Hw8.Worker.start_link(arg)
@@ -40,5 +41,19 @@ defmodule Hw8.Application do
   defp skip_migrations?() do
     # By default, sqlite migrations are run when using a release
     System.get_env("RELEASE_NAME") != nil
+  end
+
+  def serving do
+    {:ok, model_info} =
+      Bumblebee.load_model({:hf, "finiteautomata/bertweet-base-emotion-analysis"},
+        log_params_diff: false
+      )
+
+    {:ok, tokenizer} = Bumblebee.load_tokenizer({:hf, "vinai/bertweet-base"})
+
+    Bumblebee.Text.text_classification(model_info, tokenizer,
+      compile: [batch_size: 10, sequence_length: 100],
+      defn_options: [compiler: EXLA]
+    )
   end
 end

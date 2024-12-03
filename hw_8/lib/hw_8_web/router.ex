@@ -17,7 +17,7 @@ defmodule Hw8Web.Router do
   scope "/", Hw8Web do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", PageLive
   end
 
   # Other scopes may use custom stacks.
