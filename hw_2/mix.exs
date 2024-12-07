@@ -1,9 +1,9 @@
-defmodule ElixirHw2.MixProject do
+defmodule Hw2.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :elixir_hw_2,
+      app: :hw_2,
       version: "0.1.0",
       elixir: "~> 1.17",
       start_permanent: Mix.env() == :prod,

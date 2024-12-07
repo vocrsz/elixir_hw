@@ -1,4 +1,4 @@
-# ElixirHw1
+# Hw1
 
 **TODO: Add description**
 
