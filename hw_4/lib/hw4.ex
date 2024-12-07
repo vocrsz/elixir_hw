@@ -3,50 +3,20 @@ defmodule Hw4 do
   Documentation for `Hw4`.
   """
 
+  alias Hw4.Trolley
+
+  @spec start_link() :: {:ok, pid()}
   def start_link, do: GenServer.start_link(Trolley, nil, name: Trolley)
 
-  def make_moving do
-    case GenServer.call(Trolley, %{state: :moving}) do
+  @spec make_transition(state :: atom()) :: {:ok, atom()}
+  def make_transition(state) do
+    case GenServer.call(Trolley, %{state: state}) do
       {:ok, new_state} -> new_state
       {:error, message} -> raise ArgumentError, message
     end
   end
 
-  def make_idle do
-    case GenServer.call(Trolley, %{state: :idle}) do
-      {:ok, new_state} -> new_state
-      {:error, message} -> raise ArgumentError, message
-    end
-  end
-
-  def make_turned_off do
-    case GenServer.call(Trolley, %{state: :turned_off}) do
-      {:ok, new_state} -> new_state
-      {:error, message} -> raise ArgumentError, message
-    end
-  end
-
-  def make_broken do
-    case GenServer.call(Trolley, %{state: :broken}) do
-      {:ok, new_state} -> new_state
-      {:error, message} -> raise ArgumentError, message
-    end
-  end
-
-  def make_under_repair do
-    case GenServer.call(Trolley, %{state: :under_repair}) do
-      {:ok, new_state} -> new_state
-      {:error, message} -> raise ArgumentError, message
-    end
-  end
-
-  def make_under_check_up do
-    case GenServer.call(Trolley, %{state: :under_check_up}) do
-      {:ok, new_state} -> new_state
-      {:error, message} -> raise ArgumentError, message
-    end
-  end
-
+  @spec get_state() :: {:ok, atom()}
   def get_state do
     case GenServer.call(Trolley, :get_state) do
       {:ok, state} -> state
