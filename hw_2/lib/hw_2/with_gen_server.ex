@@ -1,18 +1,24 @@
-defmodule WithGenServer do
+defmodule Hw2.WithGenServer do
+  @moduledoc false
+
   use GenServer
 
+  @spec start_link() :: {:ok, pid()}
   def start_link() do
     GenServer.start_link(__MODULE__, [sync: 0, async: 0], name: __MODULE__)
   end
 
+  @spec sync_ping() :: :pong
   def sync_ping() do
     GenServer.call(__MODULE__, :ping)
   end
 
+  @spec async_ping() :: :ok
   def async_ping() do
     GenServer.cast(__MODULE__, {:ping, self()})
   end
 
+  @spec get_state() :: [sync: integer(), async: integer()]
   def get_state() do
     GenServer.call(__MODULE__, :state)
   end
