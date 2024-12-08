@@ -2,7 +2,6 @@ name: Elixir CI
 
 on:
   push:   # Run on any push to any branch
-  pull_request: # Run on any pull request targeting any branch
 
 jobs:
   test:
