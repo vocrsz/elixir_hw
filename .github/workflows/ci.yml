@@ -1,0 +1,49 @@
+name: Elixir CI
+
+on:
+  push:   # Run on any push to any branch
+  pull_request: # Run on any pull request targeting any branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    name: Test on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
+    strategy:
+      # Specify the OTP and Elixir versions to use when building
+      # and running the workflow steps.
+      matrix:
+        otp: ["26.2.3"] # Define the OTP version [required]
+        elixir: ["1.16.1"] # Define the elixir version [required]
+
+    steps:
+      # Set up Elixir and Erlang/OTP
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{matrix.otp}}
+          elixir-version: ${{matrix.elixir}}
+
+      # Set MIX_ENV to test
+      - name: Set MIX_ENV
+        run: echo "MIX_ENV=test" >> $GITHUB_ENV
+
+      # Check out the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Install dependencies
+      - name: Install dependencies
+        run: cd hw_4 && mix deps.get
+
+      # Run tests
+      - name: Run tests
+        run: cd hw_4 && mix test
+
+      # Run dialyxir
+      - name: Run tests
+        run: cd hw_4 && mix dialyzer
+
+      # Run dialyxir
+      - name: Run tests
+        run: cd hw_4 && mix credo --strict

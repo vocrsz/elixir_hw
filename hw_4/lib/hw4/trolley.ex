@@ -22,7 +22,8 @@ defmodule Hw4.Trolley do
     if new_state in @transitions[current_state] do
       success(new_state)
     else
-      {:reply, {:error, "transition from :#{current_state} to :#{new_state} is not allowed"}, current_state}
+      {:reply, {:error, "transition from :#{current_state} to :#{new_state} is not allowed"},
+       current_state}
     end
   end
 
