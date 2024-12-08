@@ -1,4 +1,4 @@
-defmodule ParallelFibonacci do
+defmodule Hw1.ParallelFibonacci do
   @moduledoc """
   Parallel Fibonacci number calculation
   """
@@ -18,18 +18,20 @@ defmodule ParallelFibonacci do
       55
 
   """
+  @spec fib(count :: integer()) :: integer()
   def fib(n) do
     start_link()
 
     fib_parallel(n)
   end
 
+  @spec fib_parallel(count :: integer()) :: integer()
   defp fib_parallel(n) when n < 2, do: n
   defp fib_parallel(n) do
     case Agent.get(__MODULE__, &Map.get(&1, n)) do
       nil ->
-        result1 = Task.async(fn -> fib_parallel(n-1) end) |> Task.await()
-        result2 = Task.async(fn -> fib_parallel(n-2) end) |> Task.await()
+        result1 = Task.async(fn -> fib_parallel(n - 1) end) |> Task.await()
+        result2 = Task.async(fn -> fib_parallel(n - 2) end) |> Task.await()
 
         result = result1 + result2
 
