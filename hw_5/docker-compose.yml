@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  phoenix:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - migrator
+    environment:
+      SECRET_KEY_BASE: 6pBTpQ713hZ0ccIC8UhvR4uiYFYGbkEV1RyZ+4obNw5Xhpxj/T0mI674/vSnNrj0
+      DATABASE_PATH: /db/prod.sqlite3
+      PHX_HOST: localhost
+    ports:
+      - "4000:4000"
+    volumes:
+      - db_volume:/db
+
+  migrator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: ["sh", "-c", "/app/bin/migrate"]
+    environment:
+      SECRET_KEY_BASE: 6pBTpQ713hZ0ccIC8UhvR4uiYFYGbkEV1RyZ+4obNw5Xhpxj/T0mI674/vSnNrj0
+      DATABASE_PATH: /db/prod.sqlite3
+    volumes:
+      - db_volume:/db
+
+volumes:
+  db_volume:

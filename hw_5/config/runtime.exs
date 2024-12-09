@@ -22,11 +22,7 @@ end
 
 if config_env() == :prod do
   database_path =
-    System.get_env("DATABASE_PATH") ||
-      raise """
-      environment variable DATABASE_PATH is missing.
-      For example: /etc/hw_5/hw_5.db
-      """
+    System.get_env("DATABASE_PATH") || "db/prod.sqlite3"
 
   config :hw_5, Hw5.Repo,
     database: database_path,
