@@ -1,9 +1,9 @@
-defmodule ElixirHw2.MixProject do
+defmodule Hw2.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :elixir_hw_2,
+      app: :hw_2,
       version: "0.1.0",
       elixir: "~> 1.17",
       start_permanent: Mix.env() == :prod,
@@ -21,8 +21,9 @@ defmodule ElixirHw2.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:dialyxir, ">= 0.0.0", only: [:dev], runtime: false},
+      {:ex_doc, ">= 0.0.0", only: [:dev], runtime: false},
+      {:credo, ">= 0.0.0", only: [:dev], runtime: false}
     ]
   end
 end
